@@ -1,0 +1,53 @@
+# The app as data, in ACRYL's Blend format (blends.acryl.dev/v1alpha1): which plugins it mounts, in what order, with what config.
+# Edit this, not app.ts, to switch a plugin off (disabled: true) or change its config. `npm run lock` records what the app is built from.
+apiVersion: blends.acryl.dev/v1alpha1
+kind: Blueprint
+metadata:
+  id: acrylblends.prompt-lab
+  name: "Prompt Lab"
+  version: 0.1.0
+  category: ai
+  description: "A prompt engineering workbench: a reusable library with variables, side-by-side model runs, ratings and version history. Works offline with sample models."
+  license: MIT
+  visibility: public
+spec:
+  runtime: cordis
+  parameters:
+    # The address the server listens on.
+    hostname: { type: string, default: 127.0.0.1 }
+  rows:
+    - id: router
+      name: acryl-router
+    # The home page's widgets: a feature plugin puts its UI on the home page with ctx.home.widget, and it leaves with the plugin.
+    - id: home
+      name: home
+    # The lab's domain: prompts, versions, models, runs and evaluations, saved as JSON in the app's data home. Every page below injects it.
+    - id: lab
+      name: lab
+    # The page shell every page shares: the top bar (pages register their entry), the lab layout and the slots.
+    - id: lab-shell
+      name: lab-shell
+    # The library and the prompt editor, the default work surface (also answers /).
+    - id: prompts
+      name: prompts
+    # Running a prompt: the model bar, the comparison column and one run in full.
+    - id: runs
+      name: runs
+    # Judging runs: quick winner, ratings and the evaluation set.
+    - id: evaluations
+      name: evaluations
+    # The models a prompt can run on.
+    - id: models
+      name: models
+    # A feature is a plugin: its folder plugins/<name>/ plus a row of its own above this one, which Settings > Plugins switches with `disabled: true`.
+    # This row starts the folders that have no row yet (a live install with `.acryl/bin/acryl plugin add`); a folder with a row is never started twice.
+    # Read-only when NODE_ENV=production.
+    - id: extensions
+      name: extensions
+    - id: server
+      name: acryl-node-server
+      config:
+        hostname: "{{parameters.hostname}}"
+    # The door: an agent working in this folder looks at the page and acts on it through .acryl/bin/acryl. Development only.
+    - id: acryl-door
+      name: acryl-door
