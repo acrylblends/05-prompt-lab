@@ -1,17 +1,22 @@
 # Prompt Lab
 
-A prompt engineering workbench with a reusable library, variable inputs and side-by-side model runs.
+A prompt engineering workbench: a reusable prompt library with variables, side-by-side model runs and quick evaluations, on the model you configure. It works without a key, showing its seeded comparison outputs, and says on the page what to set to run live.
 
-An ACRYL Blends blueprint for the **AI** category (`acrylblends.prompt-lab`, category 05 of 100).
-
-Status: designed, being built. `design/spec.md` is the specification and `design/mockup.html` the mockup (open it in a browser). The app itself,
-composed from Cordis plugins (one `plugins/<feature>/` folder and one `blend.yaml` row per feature), lands here when it passes review.
-
-When it is ready you will start it with:
+## Run it
 
 ```sh
-npm create acrylblends@latest my-app -- --from acrylblends.prompt-lab
-cd my-app && npm install && npm run dev
+npm install
+npm start
 ```
 
-Listed on https://acrylblends.github.io/blends and https://acryl.dev/blends.
+Open the address it prints. `npm test` runs the tests (node:test; no network, no key).
+
+## What to ask the chat next
+
+- Make a prompt that turns a support ticket into a short reply, with three variables.
+- Add a second comparison model and save the better answer as a new version.
+- Add an evaluation criterion for tone and rate the two seeded answers.
+
+## Screenshot
+
+![Prompt Lab](docs/screenshot.png)

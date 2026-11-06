@@ -1,0 +1,11 @@
+{
+  "name": "models",
+  "description": "The model settings page: the configured provider and models, whether a key is set and exactly which environment settings to add.",
+  "requires": [],
+  "inject": ["lab", "shell", "router"],
+  "provides": [],
+  "dependencies": {
+    "@deepseek-ai/cordis": "4.0.4"
+  },
+  "mount": "a row `- id: models` / `name: models` after the page rows in blend.yaml; it registers the Models entry in ctx.effect"
+}

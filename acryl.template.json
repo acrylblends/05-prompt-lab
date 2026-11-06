@@ -1,0 +1,5 @@
+{
+  "name": "Prompt Lab",
+  "description": "A prompt engineering workbench: a reusable prompt library with variables, side-by-side model runs and quick evaluations, on the model you configure.",
+  "plugins": []
+}

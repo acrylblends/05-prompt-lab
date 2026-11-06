@@ -1,0 +1,11 @@
+{
+  "name": "runs",
+  "description": "Runs and evaluations: one run in full with its prompt, inputs, output and rating form, and the evaluation log.",
+  "requires": [],
+  "inject": ["lab", "shell", "router"],
+  "provides": [],
+  "dependencies": {
+    "@deepseek-ai/cordis": "4.0.4"
+  },
+  "mount": "a row `- id: runs` / `name: runs` after the library row in blend.yaml; it registers the Evaluations entry in ctx.effect"
+}

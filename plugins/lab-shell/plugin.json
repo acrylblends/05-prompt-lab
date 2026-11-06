@@ -1,0 +1,11 @@
+{
+  "name": "lab-shell",
+  "description": "The Prompt Lab's page shell: the dark top bar with the workspace and the page links, links under the mount prefix and the page wrapper every page plugin uses.",
+  "requires": [],
+  "inject": ["lab", "router"],
+  "provides": ["shell"],
+  "dependencies": {
+    "@deepseek-ai/cordis": "4.0.4"
+  },
+  "mount": "a row `- id: lab-shell` / `name: lab-shell` after the promptlab row and before the page rows in blend.yaml; a page injects `shell`"
+}

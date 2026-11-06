@@ -1,0 +1,18 @@
+{
+  "name": "promptlab",
+  "description": "Prompt Lab's domain: prompts, versions, runs and evaluations saved as JSON in the app's data home, with the model behind an injected port. Every page plugin injects this one.",
+  "requires": [],
+  "inject": ["appInstance"],
+  "provides": ["lab"],
+  "dependencies": {
+    "@deepseek-ai/cordis": "4.0.4"
+  },
+  "mount": "a row `- id: promptlab` / `name: promptlab` before the page rows in blend.yaml; a page injects the `lab` service",
+  "config": {
+    "file": "the JSON file, relative to the app's home (default prompt-lab.json)",
+    "store": "a Store port for tests",
+    "clock": "what time it is, for tests",
+    "newId": "how ids are made, for tests",
+    "model": "a ModelClient port; the server builds the environment model, tests pass a fake"
+  }
+}

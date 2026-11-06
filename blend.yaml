@@ -1,0 +1,50 @@
+# The app as data, in ACRYL's Blend format (blends.acryl.dev/v1alpha1): which plugins it mounts, in what order, with what config.
+# Edit this, not app.ts, to switch a plugin off (disabled: true) or change its config. `npm run lock` records what the app is built from.
+apiVersion: blends.acryl.dev/v1alpha1
+kind: Blueprint
+metadata:
+  id: acrylblends.prompt-lab
+  name: "Prompt Lab"
+  version: 0.1.0
+  category: ai
+  description: "A prompt engineering workbench: a reusable prompt library with variables, side-by-side model runs and quick evaluations, on the model you configure."
+  license: MIT
+  visibility: public
+spec:
+  runtime: cordis
+  parameters:
+    # The address the server listens on.
+    hostname: { type: string, default: 127.0.0.1 }
+  rows:
+    - id: router
+      name: acryl-router
+    # The home page's widgets: a feature plugin puts its UI on the home page with ctx.home.widget, and it leaves with the plugin.
+    - id: home
+      name: home
+    # The lab's domain: prompts, versions, runs and evaluations, saved as JSON in the app's data home; the model is an injected port.
+    - id: promptlab
+      name: promptlab
+    # The page shell: the dark lab top bar, the page links and the look every page shares.
+    - id: lab-shell
+      name: lab-shell
+    # The three-column lab: the prompt library, the prompt editor and the side-by-side run comparison (also answers /).
+    - id: library
+      name: library
+    # Runs and evaluations: one run in full with its rating form, and the evaluation log.
+    - id: runs
+      name: runs
+    # The model settings page: the configured provider, models and key state.
+    - id: models
+      name: models
+    # A feature is a plugin: its folder plugins/<name>/ plus a row of its own above this one, which Settings > Plugins switches with `disabled: true`.
+    # This row starts the folders that have no row yet (a live install with `.acryl/bin/acryl plugin add`); a folder with a row is never started twice.
+    # Read-only when NODE_ENV=production.
+    - id: extensions
+      name: extensions
+    - id: server
+      name: acryl-node-server
+      config:
+        hostname: "{{parameters.hostname}}"
+    # The door: an agent working in this folder looks at the page and acts on it through .acryl/bin/acryl. Development only.
+    - id: acryl-door
+      name: acryl-door
